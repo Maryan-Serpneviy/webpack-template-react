@@ -1,0 +1,36 @@
+@import "utils/libraries";
+@import "utils/variables";
+@import "utils/mixins";
+@import "utils/fonts";
+
+// import Bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
+
+h1 {
+	//font-size: rem(20);
+	color: $primary-color;
+	text-align: center;
+}
+
+img {
+	display: block;
+	text-align: center;
+	width: 50%;
+	margin: auto;
+}
+
+html {
+	font-family: $main-font;
+	line-height: $main-line-height;
+	font-size: $main-font-size;
+	color: $main-font-color;
+	height: 100;
+	@media screen and (max-width: $desktop-width) {
+		font-size: 16px;
+	}
+	@media screen and (max-width: $tablet-width) {
+		font-size: 15px;
+	}
+	@media screen and (max-width: $phone-width) {
+		font-size: 14px;
+	}
+}
