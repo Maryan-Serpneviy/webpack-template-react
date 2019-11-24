@@ -1,61 +1,73 @@
 {
   "name": "webpack-template",
   "version": "1.0.0",
-  "description": "My webpack template",
+  "description": "react template",
   "main": "index.js",
   "author": "Maryan",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --open --config ./config/webpack.dev.config.js",
-    "build": "webpack --config ./config/webpack.build.config.js"
+    "start": "webpack-dev-server --open --config ./config/webpack.dev.config.js",
+    "build": "webpack --config ./config/webpack.build.config.js",
+    "deploy": "gh-pages -d build"
   },
-  "browserslist": [
-    "> 1%",
-    "last 3 version"
-  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "resolutions": {
     "image-webpack-loader/imagemin-pngquant": "5.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "autoprefixer": "^9.6.1",
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "autoprefixer": "^9.7.2",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
-    "copy-webpack-plugin": "^5.0.4",
+    "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.0",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.10",
-    "eslint": "^6.3.0",
-    "eslint-loader": "^3.0.0",
-    "file-loader": "^4.2.0",
+    "eslint": "^6.7.0",
+    "eslint-loader": "^3.0.2",
+    "file-loader": "^4.3.0",
+    "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "imagemin-pngquant": "^8.0.0",
     "imagemin-webpack-plugin": "^2.4.2",
     "mini-css-extract-plugin": "^0.8.0",
     "node-libpng": "^0.2.7",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.0",
     "path": "^0.12.7",
     "pngquant": "^3.0.0",
     "pngquant-bin": "^5.0.2",
     "postcss-loader": "^3.0.0",
-    "postcss-nested": "^4.1.2",
-    "prettier": "^1.18.2",
+    "postcss-nested": "^4.2.1",
+    "prettier": "^1.19.1",
     "prettier-webpack-plugin": "^1.2.0",
     "prop-types": "15.7.2",
     "pug": "^2.0.4",
     "pug-loader": "^2.4.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7",
-    "webpack-dev-server": "^3.8.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "react": "^16.9.0",
+    "@babel/polyfill": "^7.7.0",
+    "react": "^16.12.0",
     "react-cli": "^0.3.1",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.12.0",
+    "react-scripts": "^3.2.0"
   }
 }
