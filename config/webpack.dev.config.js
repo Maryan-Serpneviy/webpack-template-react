@@ -6,6 +6,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 	mode: 'development',
 	devtool: 'cheap-module-eval-source-map',
 	devServer: {
+		open: true,
 		port: 8081,
 		overlay: {
 			warnings: false,
