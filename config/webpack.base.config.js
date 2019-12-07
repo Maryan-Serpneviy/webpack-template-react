@@ -38,9 +38,30 @@ module.exports = {
 	},
 	module: {
 		rules: [{
-			test: /\.jsx?$/,
+			test: /\.(js|mjs|jsx|ts|tsx)$/,
 			exclude: '/node_modules/',
-			use: ['babel-loader', 'eslint-loader']
+			use: [{
+				options: {
+					plugins: [
+						[
+							require.resolve('babel-plugin-named-asset-import'),
+							{
+								loaderMap: {
+									svg: {
+										ReactComponent: '@svgr/webpack?-svgo,+ref![path]',
+									}
+								}
+							}
+						]
+					]
+				},
+				loader: 'babel-loader'
+			}]
+			
+		}, {
+			test: /\.(js|mjs|jsx|ts|tsx)$/,
+			exclude: '/node_modules/',
+			use: 'eslint-loader'
 		}, {
 			test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
 			loader: 'file-loader',
@@ -70,6 +91,8 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			hash: false,
+			inject: true,
+			base: 'https://maryan-serpneviy.github.io/app/dist/index.html',
 			template: `${Path.public}/index.html`,
 			filename: `index.html`
 		}),
@@ -81,8 +104,8 @@ module.exports = {
 			disable: process.env.NODE_ENV !== 'production' // Disable during development
 		}),
 		new CopyWebpackPlugin([
-			{ from: `${Path.public}`, to: '' }
-			// { from: `${Path.src}/assets/fonts`, to: 'fonts' }
+			{ from: `${Path.public}`, to: '' },
+			{ from: `${Path.src}/assets/images`, to: 'assets/images' }
 		])
 	]
 }
