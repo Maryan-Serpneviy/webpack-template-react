@@ -87,7 +87,7 @@
 		"no-return-assign": "error",
 		"no-self-assign": "error",
 		"no-self-compare": "error",
-		"no-shadow": "error",
+		"no-shadow": "warn",
 		"no-shadow-restricted-names": "error",
 		"no-tabs": ["error", { "allowIndentationTabs": true }],
 		"no-this-before-super": "error",
