@@ -30,7 +30,7 @@
 		"keyword-spacing": ["error", { "before": true }],
 		"max-len": ["error", 150, 2, {
 			"ignoreUrls": true,
-			"ignoreComments": false,
+			"ignoreComments": true,
 			"ignoreRegExpLiterals": true,
 			"ignoreStrings": true,
 			"ignoreTemplateLiterals": true
@@ -118,7 +118,7 @@
 		"space-infix-ops": ["error", { "int32Hint": false }],
 		"space-unary-ops": "error",
 		"template-curly-spacing": "error",
-		"use-isnan": "error",
+		"use-isnan": "warn",
 		"yield-star-spacing": ["error", "after"],
 		"yoda": "error"
 	}

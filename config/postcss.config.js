@@ -1,4 +1,4 @@
-// npm install postcss-loader autoprefixer css-mqpacker cssnano --save-dev
+// npm i postcss-loader autoprefixer css-mqpacker cssnano -D
 
 module.exports = {
     plugins: [
