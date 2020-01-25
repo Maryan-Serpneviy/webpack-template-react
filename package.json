@@ -1,6 +1,6 @@
 {
   "name": "react-webpack-template",
-  "version": "2.0.0",
+  "version": "2.1.6",
   "description": "react template",
   "main": "index.js",
   "author": "Maryan",
@@ -71,7 +71,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "mobx": "^5.15.2",
+    "mobx": "^5.15.3",
     "mobx-react": "^6.1.5",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",

@@ -16,7 +16,7 @@
 		"comma-spacing": ["error", { "before": false, "after": true }],
 		"comma-style": ["error", "last"],
 		"constructor-super": "error",
-		"curly": "error",
+		"curly": "warn",
 		"default-case": "warn",
 		"eol-last": ["error", "always"],
 		"eqeqeq": ["warn", "always"],
