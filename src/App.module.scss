@@ -1,11 +1,16 @@
 $link-color: #61dafb;
 
+@font-face {
+	font-family: "Caviar Dreams";
+	src: url("./assets/fonts/Caviar-Dreams/CaviarDreams.ttf");
+}
+
 body {
     padding: 0;
     margin: 0;
     font-family: 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: calc(5px + 2vmin);
-    color: #fff;
+    color: rgb(224, 245, 255);
     background-color: #282c34;
     overflow: hidden;
     user-select: none;

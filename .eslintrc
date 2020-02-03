@@ -1,14 +1,22 @@
 {
-    "parser": "babel-eslint",
 	"extends": "eslint:recommended",
 	"env": {
-		"browser": true,
-		"es6": true
+		"browser": true
 	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"ecmaFeatures": {
+			"modules": true
+		},
+		"sourceType": "module"
+	},
+	"plugins": [
+		"@typescript-eslint/eslint-plugin"
+	],
 	"rules": {
 		"accessor-pairs": "error",
 		"array-bracket-spacing": ["error", "never"],
-		"array-callback-return": "error",
 		"arrow-spacing": ["error", { "before": true, "after": true }],
 		"block-spacing": "error",
 		"brace-style": "error",
@@ -97,14 +105,14 @@
 			"ignoreComments": true
 		}],
 		"no-useless-call": "error",
-        "no-undef-init": "error",
+		"no-useless-constructor": "warn",
+      "no-undef-init": "error",
 		"no-undef":"off",
 		"no-unneeded-ternary": "error",
 		"no-unreachable": "error",
 		"no-unused-vars": ["off", { "vars": "all", "args": "after-used", "ignoreRestSiblings": true }],
 		"no-use-before-define": ["warn", { "functions": false, "classes": true, "variables": true }],
 		"no-useless-computed-key": "error",
-		"no-useless-constructor": "error",
 		"no-var": "error",
 		"no-with": "error",
 		"object-curly-spacing": ["warn", "always"],
