@@ -1,5 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import { HashRouter as Router, Route } from 'react-router-dom'
+import { Provider } from 'mobx-react'
+import store from '~s'
+import App from '~cm/App'
 
-ReactDOM.render(<App/>, document.querySelector('#root'))
+const app = (
+   <Router>
+      <Provider store={"store"}>
+         <App />
+      </Provider>
+   </Router>
+)
+
+ReactDOM.render(app, document.querySelector('#root'))

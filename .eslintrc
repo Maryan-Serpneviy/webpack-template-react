@@ -55,7 +55,7 @@
 		"no-class-assign": "error",
 		"no-compare-neg-zero": "error",
 		"no-cond-assign": "error",
-		"no-console": "warn",
+		"no-console": ["warn", { "allow": ["warn", "error"] }],
 		"no-debugger": "error",
 		"no-delete-var": "error",
 		"no-dupe-args": "error",
