@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './App.module.scss'
-import Logo from '~i/React.svg'
+import Logo from '@img/React.svg'
 
-interface Style {
+type Style = {
     app: string,
     heading: string,
     link: string,

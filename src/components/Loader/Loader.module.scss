@@ -1,0 +1,218 @@
+$base: 25;
+$speed: 8.5;
+
+// static single color
+$color: rgba(21, 114, 201, 0.7);
+// dynamic multiple colors
+$list1:
+   #26A65B, #26A65B, #26A65B, #345A5E, #00AA55, #16A085, #007A7C, #28A228, #03A678,
+   #007A7C, #009FD4, #00A4A6, #4183D7, #527AC2, #4B77BE, #1978d4, #3455DB, #1460AA,
+   #BF6EE0, #E73C70, #D400D4, #B500B5, #AA00AA, #8B008B, #7023B7, #7600A8, #600060,
+   #E63022, #E65722, #D46A43, #D35400, #F64747, #E73C4E, #DC143C, #E00000, #B11030;
+$list2: #56c7fa, #f76540, #ffcb05, #62cd9f, #b67baa;
+// set colors list
+$colors: $list1;
+
+// PRIVATE PART
+// coefs: do not change
+$gap: $base * 1.222;
+$translate-step: $base * 1.111;
+// colors randomizer
+$length: length($colors);
+$repeat: $length; // warning: a higher number outputs more CSS
+$color-coef: 0; // value for color func
+// optimization
+@if ($length < 10) { // if small colors list
+   $repeat: $length * 2; // increased range
+   $color-coef: 10 // apply color func to minimize colors repeat
+} @else if ($length >= 20) { // if large list
+   $repeat: 20 // limit max repeat value
+}
+
+@for $i from 1 through $length {
+   $colors: append($colors, darken(nth($colors, $i), $color-coef));
+}
+// animation
+@function invertSpeed($value: $speed) {
+   @return (#{1 / ($value / 10)}s)
+}
+
+@mixin apply-animation ($keyframes, $duration: $speed) {
+   -webkit-animation: $keyframes invertSpeed() infinite ease-in;
+   animation: $keyframes invertSpeed() infinite ease-in;
+}
+
+@mixin delay($delay) {
+   -webkit-animation-delay: $delay;
+   animation-delay: $delay
+}
+
+body, html {
+   height: 100%;
+   width: 100%;
+   overflow-x: hidden;
+}
+
+body {
+   margin: 0;
+   background: transparent;
+}
+
+.loader {
+   height: 100%;
+   width: 100%;
+
+   .wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: $gap * 4px;
+      height: $gap * 3px;
+      margin: 0;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%)
+   }
+}
+
+@media (max-width: 550px) {
+   .loader {
+      -webkit-transform: scale(0.75);
+      transform: scale(0.75)
+   }
+}
+
+@media (max-width: 440px) {
+   .loader {
+      -webkit-transform: scale(0.5);
+      transform: scale(0.5)
+   }
+}
+
+.square {
+   position: relative;
+   @for $i from 0 through 3 {
+      &:nth-child(#{$i + 1}) {
+         margin-left: (#{$gap * $i}px);
+      }
+   }
+
+   &:nth-child(1) span {
+      @include apply-animation(animsquare1)
+   }
+   &:nth-child(2) span {
+      @include apply-animation(animsquare2)
+   }
+   &:nth-child(3) span {
+      @include apply-animation(animsquare3)
+   }
+   &:nth-child(4) span {
+      @include apply-animation(animsquare4)
+   }
+
+   span {
+      position: absolute;
+      top: 0px;
+      left: 20px;
+      height: (#{$base}px);
+      width: (#{$base}px);
+      border-radius: 2px;
+      
+      // single color
+      background: nth($colors, random(length($colors)));
+      // multiple colors
+      @for $i from 1 through $repeat {
+         &:nth-of-type(#{length($colors)}n+#{$i}) {
+           background: nth($colors, random(length($colors)));
+         }
+      }
+
+      @for $i from 0 through 2 {
+         &:nth-child(#{$i + 1}) {
+            top: (#{$gap * $i}px);
+            @include delay(0.15s * $i)
+         }
+      }
+   }
+}
+
+@mixin transform-from {
+   -webkit-transform: translate(0px, 0px) rotate(0deg);
+   transform: translate(0px, 0px) rotate(0deg)
+}
+
+@mixin transform-to {
+   -webkit-transform: translate(-(#{$translate-step}px), 0px) rotate(-90deg);
+   transform: translate(-(#{$translate-step}px), 0px) rotate(-90deg)
+}
+
+@-webkit-keyframes animsquare1 {
+   0%, 5%, 95%, 100% {
+      @include transform-from
+   }
+   30%, 70% {
+      @include transform-to
+   }
+}
+
+@keyframes animsquare1 {
+   0%, 5%, 95%, 100% {
+      @include transform-from
+   }
+   30%, 70% {
+      @include transform-to
+   }
+}
+
+@-webkit-keyframes animsquare2 {
+   0%, 10%, 90%, 100% {
+      @include transform-from
+   }
+   35%, 65% {
+      @include transform-to
+   }
+}
+
+@keyframes animsquare2 {
+   0%, 10%, 90%, 100% {
+      @include transform-from
+   }
+   35%, 65% {
+      @include transform-to
+   }
+}
+
+@-webkit-keyframes animsquare3 {
+   0%, 15%, 85%, 100% {
+      @include transform-from
+   }
+   40%, 60% {
+      @include transform-to
+   }
+}
+
+@keyframes animsquare3 {
+   0%, 15%, 85%, 100% {
+      @include transform-from
+   }
+   40%, 60% {
+      @include transform-to
+   }
+}
+
+@-webkit-keyframes animsquare4 {
+   0%, 20%, 80%, 100% {
+      @include transform-from
+   }
+   45%, 55% {
+      @include transform-to
+   }
+}
+
+@keyframes animsquare4 {
+   0%, 20%, 80%, 100% {
+      @include transform-from
+   }
+   45%, 55% {
+      @include transform-to
+   }
+}
