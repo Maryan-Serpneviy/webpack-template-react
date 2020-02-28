@@ -3,8 +3,10 @@ import PropTypes, { InferProps } from 'prop-types'
 import classes from './Input.module.scss'
 
 const Input: React.FC<Props> = ({
+   className,
    label,
    type,
+   placeholder,
    value,
    error,
    isTouched,
@@ -19,7 +21,7 @@ const Input: React.FC<Props> = ({
 }: InferProps<typeof Input.propTypes>) => {
 
    const inputRef = useRef(null)
-
+   
    const inputType = type || 'text'
    const htmlFor = `${inputType}-${Math.round(Math.random() * 1000)}`
    const style = [
@@ -45,9 +47,10 @@ const Input: React.FC<Props> = ({
       <div className={style.join(' ')}>
          <label htmlFor={htmlFor}>{label}</label>
          <input
-            ref={autofocus || autoblur ? inputRef : null}
             type={inputType}
             id={htmlFor}
+            ref={autofocus || autoblur ? inputRef : null}
+            placeholder={placeholder ? placeholder : ''}
             value={value}
             onChange={onChange}
             onKeyDown={onKeyDown ? onKeyDown : null}
@@ -60,32 +63,36 @@ const Input: React.FC<Props> = ({
 }
 
 Input.propTypes = {
+   className: PropTypes.string,
    label: PropTypes.string,
    type: PropTypes.string,
+   placeholder: PropTypes.string,
    value: PropTypes.string,
    error: PropTypes.string,
-   isTouched: PropTypes.bool.isRequired,
-   isValid: PropTypes.bool.isRequired,
-   shouldValidate: PropTypes.bool.isRequired,
+   isTouched: PropTypes.bool,
+   isValid: PropTypes.bool,
+   shouldValidate: PropTypes.bool,
    autoblur: PropTypes.bool,
    autofocus: PropTypes.bool,
-   onChange: PropTypes.func.isRequired,
+   onChange: PropTypes.func,
    onKeyDown: PropTypes.func,
    onKeyUp: PropTypes.func,
    onKeyPress: PropTypes.func
 }
 
 type Props = {
+   className?: string
    label?: string
    type?: string
+   placeholder?: string
    value?: string
    error?: string
-   isTouched: boolean
-   isValid: boolean
-   shouldValidate: boolean
+   isTouched?: boolean
+   isValid?: boolean
+   shouldValidate?: boolean
    autoblur?: boolean
    autofocus?: boolean
-   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
    onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void
    onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void
