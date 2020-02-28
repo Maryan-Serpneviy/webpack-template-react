@@ -1,16 +1,9 @@
+
+
 $link-color: #61dafb;
 
-@font-face {
-	font-family: "Caviar Dreams";
-	src: url("../assets/fonts/Caviar-Dreams/CaviarDreams.ttf");
-}
-
 body {
-    padding: 0;
-    margin: 0;
-    font-family: 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: calc(5px + 2vmin);
-    color: rgb(224, 245, 255);
     background-color: #282c34;
     overflow: hidden;
     user-select: none;
@@ -24,6 +17,8 @@ body {
 }
 
 .heading {
+    margin-top: 25px;
+    font-size: 40px;
     margin-bottom: 0;
 }
 
@@ -35,8 +30,14 @@ body {
 
 .link {
     color: $link-color;
+    padding-top: 20px;
+    font-size: 25px;
+    position: relative;
+    animation: flit 5s ease-in-out 1.5s infinite;
+
     &:hover {
-        text-decoration: none;
+        color: $link-color;
+        text-decoration: underline;
     }
     &:active {
         color: darken($link-color, 20%);
@@ -51,3 +52,27 @@ body {
         transform: rotate(360deg);
     }
 }
+
+@keyframes flit {
+    0% {
+       top: 0;
+       left: 0;
+    }
+ 
+    25% {
+       left: 15px;
+    }
+ 
+    50% {
+       top: 20px;
+    }
+ 
+    75% {
+       left: -15px;
+    }
+ 
+    100% {
+       top: 0;
+       left: 0;
+    }
+ }

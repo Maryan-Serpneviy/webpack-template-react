@@ -4,6 +4,7 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 import { Provider } from 'mobx-react'
 import store from '@s'
 import App from '@com/App'
+import './assets/scss/main.scss'
 
 const app = (
    <Router>

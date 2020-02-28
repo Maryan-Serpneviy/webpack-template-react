@@ -1,16 +1,9 @@
 import React from 'react'
-import styles from './App.module.scss'
 import Logo from '@img/React.svg'
-
-type Style = {
-    app: string,
-    heading: string,
-    link: string,
-    logo: string
-}
+import styles from './App.module.scss'
 
 export default function App() {
-    const { app, heading, link, logo }: Style = styles
+    const { app, heading, link, logo } = styles
     
     return (
         <div className={app}>
