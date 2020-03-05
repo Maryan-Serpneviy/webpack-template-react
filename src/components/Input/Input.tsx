@@ -41,7 +41,7 @@ const Input: React.FC<Props> = ({
       if (autofocus) {
          inputRef.current.focus()
       }
-   }, [])
+   }, [autoblur, autofocus])
 
    return (
       <div className={style.join(' ')}>
