@@ -1,5 +1,8 @@
 {
-	"extends": "eslint:recommended",
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended"
+	],
 	"env": {
 		"browser": true
 	},
@@ -12,7 +15,8 @@
 		"sourceType": "module"
 	},
 	"plugins": [
-		"@typescript-eslint/eslint-plugin"
+		"@typescript-eslint/eslint-plugin",
+		"react-hooks"
 	],
 	"rules": {
 		"accessor-pairs": "error",
@@ -128,6 +132,30 @@
 		"template-curly-spacing": "error",
 		"use-isnan": "warn",
 		"yield-star-spacing": ["error", "after"],
-		"yoda": "error"
+		"yoda": "error",
+
+		"react/forbid-foreign-prop-types": "error",
+		"react/no-children-prop": "off",
+		"react/no-danger": "error",
+		"react/no-deprecated": "warn",
+		"react/no-did-mount-set-state": "error",
+		"react/no-did-update-set-state": "error",
+		"react/no-multi-comp": "error",
+		"react/no-redundant-should-component-update": "error",
+		"react/no-this-in-sfc": "error",
+		"react/no-typos": "error",
+		"react/no-unsafe": "error",
+		"react/no-unused-prop-types": "error",
+		"react/no-unused-state": "error",
+		"react/jsx-no-target-blank": "warn",
+		"react/no-will-update-set-state": "error",
+		"react/prefer-es6-class": "error",
+		"react/jsx-no-undef": "error",
+		"react/jsx-no-useless-fragment": "error",
+		"react/jsx-pascal-case": "error",
+		"react/jsx-props-no-multi-spaces": "error",
+		"react/jsx-uses-react": "error",
+		"react-hooks/rules-of-hooks": "error",
+    	"react-hooks/exhaustive-deps": "warn"
 	}
 }
