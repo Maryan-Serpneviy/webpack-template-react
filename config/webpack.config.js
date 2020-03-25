@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const Path = {
 	config: path.join(__dirname, '../config'),
@@ -112,6 +113,7 @@ module.exports = {
 		}]
 	},
 	plugins: [
+		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			hash: false,
 			inject: true,

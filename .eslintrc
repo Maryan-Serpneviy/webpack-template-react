@@ -1,8 +1,5 @@
 {
-	"extends": [
-		"eslint:recommended",
-		"plugin:react/recommended"
-	],
+	"extends": "eslint:recommended",
 	"env": {
 		"browser": true
 	},
@@ -15,8 +12,7 @@
 		"sourceType": "module"
 	},
 	"plugins": [
-		"@typescript-eslint/eslint-plugin",
-		"react-hooks"
+		"@typescript-eslint/eslint-plugin"
 	],
 	"rules": {
 		"accessor-pairs": "error",
@@ -27,7 +23,7 @@
 		"comma-dangle": ["error", "never"],
 		"comma-spacing": ["error", { "before": false, "after": true }],
 		"comma-style": ["error", "last"],
-		"constructor-super": "error",
+		"constructor-super": "warn",
 		"curly": "warn",
 		"default-case": "warn",
 		"eol-last": ["error", "always"],
@@ -102,14 +98,14 @@
 		"no-shadow": "warn",
 		"no-shadow-restricted-names": "error",
 		"no-tabs": ["error", { "allowIndentationTabs": true }],
-		"no-this-before-super": "error",
+		"no-this-before-super": "warn",
 		"no-throw-literal": "error",
 		"no-trailing-spaces": ["error", {
 			"skipBlankLines": true,
 			"ignoreComments": true
 		}],
 		"no-useless-call": "error",
-		"no-useless-constructor": "warn",
+		"no-useless-constructor": "off",
       "no-undef-init": "error",
 		"no-undef":"off",
 		"no-unneeded-ternary": "error",
@@ -132,30 +128,6 @@
 		"template-curly-spacing": "error",
 		"use-isnan": "warn",
 		"yield-star-spacing": ["error", "after"],
-		"yoda": "error",
-
-		"react/forbid-foreign-prop-types": "error",
-		"react/no-children-prop": "off",
-		"react/no-danger": "error",
-		"react/no-deprecated": "warn",
-		"react/no-did-mount-set-state": "error",
-		"react/no-did-update-set-state": "error",
-		"react/no-multi-comp": "error",
-		"react/no-redundant-should-component-update": "error",
-		"react/no-this-in-sfc": "error",
-		"react/no-typos": "error",
-		"react/no-unsafe": "error",
-		"react/no-unused-prop-types": "error",
-		"react/no-unused-state": "error",
-		"react/jsx-no-target-blank": "warn",
-		"react/no-will-update-set-state": "error",
-		"react/prefer-es6-class": "error",
-		"react/jsx-no-undef": "error",
-		"react/jsx-no-useless-fragment": "error",
-		"react/jsx-pascal-case": "error",
-		"react/jsx-props-no-multi-spaces": "error",
-		"react/jsx-uses-react": "error",
-		"react-hooks/rules-of-hooks": "error",
-    	"react-hooks/exhaustive-deps": "warn"
+		"yoda": "error"
 	}
 }

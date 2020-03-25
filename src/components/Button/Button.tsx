@@ -3,35 +3,32 @@ import PropTypes, { InferProps } from 'prop-types'
 import classes from './Button.module.scss'
 
 type Props = {
-   className?: string
-   type?: string
    style?: object
+   type?: string
    disabled?: boolean
    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+   onMouseDown?: (event: React.MouseEvent<HTMLButtonElement>) => void
+   onMouseUp?: (event: React.MouseEvent<HTMLButtonElement>) => void
    children: JSX.Element[] | JSX.Element
 }
 
 const Button: React.FC<Props> = (
-   { className, disabled, onClick, children, ...props }
+   { style, disabled, onClick, children, ...props }
    : InferProps<typeof Button.propTypes>) => {
 
-   let styles = [classes.button]
-   if (disabled) {
-      styles.push(classes.disabled)
-   }
-   if (props.type && !disabled) {
-      styles.push(props.type)
-   }
-   if (className && !disabled) {
-      styles = [...styles, ...className.split(' ')]
-   }
+   const styles = [
+      classes.button,
+      classes[props.type]
+   ]
 
    return (
       <button
          className={styles.join(' ')}
-         style={props.style || null}
-         onClick={onClick}
+         style={{ ...style }}
          disabled={disabled}
+         onClick={onClick}
+         onMouseDown={props.onMouseDown ? props.onMouseDown : null}
+         onMouseUp={props.onMouseUp ? props.onMouseUp : null}
       >
          {children}
       </button>
@@ -39,11 +36,12 @@ const Button: React.FC<Props> = (
 }
 
 Button.propTypes = {
-   className: PropTypes.string,
-   type: PropTypes.string,
    style: PropTypes.object,
+   type: PropTypes.string,
    disabled: PropTypes.bool,
-   onClick: PropTypes.func
+   onClick: PropTypes.func,
+   onMouseDown: PropTypes.func,
+   onMouseUp: PropTypes.func
 }
 
 export default Button

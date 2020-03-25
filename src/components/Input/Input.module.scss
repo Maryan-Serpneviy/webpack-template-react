@@ -1,6 +1,8 @@
 @import "../../assets/scss/utils/variables";
 
 .input {
+   margin-bottom: 15px;
+
    label {
       margin-bottom: 5px;
       font-size: 17px;
@@ -10,15 +12,17 @@
    }
 
    input {
+      display: block;
       box-sizing: border-box;
-      border: 1px solid $border-base;
-      padding: 10px 20px;
+      border: 1px solid #bebebe;
+      padding: 7px 10px;
+      margin: 0 0 5px;
       width: 100%;
-      margin: 0 auto;
+      outline: none;
       transition: all .3s ease-in-out;
       font-size: 16px;
       letter-spacing: 0.06em;
-      border-radius: 4px;
+      font-weight: bold;
    }
 
    span {
@@ -29,5 +33,10 @@
 
    &.invalid label {
       color: $danger-color;
+   }
+
+   .errors {
+      color: darken($danger-color, 20);
+      font-weight: bold;
    }
 }

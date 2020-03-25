@@ -1,12 +1,19 @@
-
-
 $link-color: #61dafb;
+$width: 50vmin;
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
 
 body {
-    font-size: calc(5px + 2vmin);
-    background-color: #282c34;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
     user-select: none;
+    background-color: #282c34;
+    font-size: calc(5px + 2vmin);
 }
 
 .app {
@@ -31,9 +38,9 @@ body {
 .link {
     color: $link-color;
     padding-top: 20px;
+    padding-bottom: 70px;
     font-size: 25px;
     position: relative;
-    // animation: flit 5s ease-in-out 1.5s infinite;
 
     &:hover {
         color: $link-color;
@@ -53,26 +60,56 @@ body {
     }
 }
 
-@keyframes flit {
-    0% {
-       top: 0;
-       left: 0;
+.circles {
+    width: $width;
+    height: $width;
+    position: relative;
+    perspective: 50000px;
+    color: #61DAFB;
+    
+    span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        width: 18.4%;
+        height: 18.4%;
+        border-radius: 100%;
+        background: currentColor;
     }
- 
-    25% {
-       left: 15px;
+    
+    div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-left:
+            $width / 25 solid;
+        border-top:
+            $width / 25 solid transparent;
+        border-radius: 100%;
+        
+        @for $i from 1 through 3 {
+            &:nth-child(#{$i}) {
+                animation: anim-#{$i} 1s linear infinite;
+            }
+        }
     }
- 
-    50% {
-       top: 20px;
+}
+  
+@for $i from 1 through 3 {
+    @keyframes anim-#{$i} {
+        from {
+        transform:
+            rotateZ(360deg / 3 * $i)
+            rotateX(66deg)
+            rotateZ(0deg);
+        }
+        to {
+        transform:
+            rotateZ(360deg / 3 * $i)
+            rotateX(66deg)
+            rotateZ(360deg);
+        }
     }
- 
-    75% {
-       left: -15px;
-    }
- 
-    100% {
-       top: 0;
-       left: 0;
-    }
- }
+}

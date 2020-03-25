@@ -3,15 +3,19 @@ import Logo from '@img/React.svg'
 import styles from './App.module.scss'
 
 export default function App() {
-    const { app, heading, link, logo } = styles
-    
     return (
-        <div className={app}>
-            <h1 className={heading}>Welcome to React</h1>
-            <a className={link} href="https://uk.reactjs.org/docs/getting-started.html" target="_blank">
+        <div className={styles.app}>
+            <h1 className={styles.heading}>Welcome to React</h1>
+            <a className={styles.link} href="https://uk.reactjs.org/docs/getting-started.html" target="_blank">
                 Getting started
             </a>
-            <Logo className={logo} />
+            {/* <Logo className={styles.logo} /> */}
+            <div className={styles.circles}>
+                <div></div>
+                <div></div>
+                <div></div>
+                <span></span>
+            </div>
         </div>
     )
 }

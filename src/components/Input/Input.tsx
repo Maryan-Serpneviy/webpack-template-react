@@ -2,33 +2,44 @@ import React, { useRef, useEffect } from 'react'
 import PropTypes, { InferProps } from 'prop-types'
 import classes from './Input.module.scss'
 
-const Input: React.FC<Props> = ({
-   className,
-   label,
-   type,
-   placeholder,
-   value,
-   error,
-   isTouched,
-   isValid,
-   shouldValidate,
-   autoblur,
-   autofocus,
-   onChange,
-   onKeyDown,
-   onKeyUp,
-   onKeyPress
-}: InferProps<typeof Input.propTypes>) => {
+type Props = {
+   label?: string
+   type?: string
+   value?: string
+   error?: string
+   touched?: boolean
+   untouched?: boolean
+   dirty?: boolean
+   pristine?: boolean
+   valid?: boolean
+   invalid?: boolean
+   shouldValidate: boolean
+   errors?: object
+   autoblur?: boolean
+   autofocus?: boolean
+   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+   onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
+   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+}
+
+const Input: React.FC<Props> = (
+   { label, type, value, error, touched, valid, errors,
+     shouldValidate, autoblur, autofocus, onChange,
+     ...props }
+   : InferProps<typeof Input.propTypes>) => {
 
    const inputRef = useRef(null)
-   
+
    const inputType = type || 'text'
-   const htmlFor = `${inputType}-${Math.round(Math.random() * 1000)}`
+   const htmlFor = label ? `${inputType}-${Math.round(Math.random() * 1000)}` : null
    const style = [
       classes.input
    ]
 
-   const isInvalid = (): boolean => !isValid && isTouched && shouldValidate
+   const isInvalid = (): boolean => !valid && touched && shouldValidate
 
    if (isInvalid()) {
       style.push(classes.invalid)
@@ -41,61 +52,59 @@ const Input: React.FC<Props> = ({
       if (autofocus) {
          inputRef.current.focus()
       }
-   }, [autoblur, autofocus])
-
+   }, [])
+   
    return (
       <div className={style.join(' ')}>
-         <label htmlFor={htmlFor}>{label}</label>
+         {label && <label htmlFor={htmlFor}>{label}</label>}
          <input
+            ref={autofocus || autoblur ? inputRef : null}
             type={inputType}
             id={htmlFor}
-            ref={autofocus || autoblur ? inputRef : null}
-            placeholder={placeholder ? placeholder : ''}
             value={value}
             onChange={onChange}
-            onKeyDown={onKeyDown ? onKeyDown : null}
-            onKeyUp={onKeyUp ? onKeyUp : null}
-            onKeyPress={onKeyPress ? onKeyPress : null}
+            onKeyDown={props.onKeyDown ? props.onKeyDown : null}
+            onKeyUp={props.onKeyUp ? props.onKeyUp : null}
+            onKeyPress={props.onKeyPress ? props.onKeyPress : null}
+            onFocus={props.onFocus ? props.onFocus : null}
+            onBlur={props.onBlur ? props.onBlur : null}
          />
-         {isInvalid() && <span>{error || 'Value is incorrect'}</span>}
+         {error && !errors && isInvalid() && <span>{error}</span>}
+         {!error && errors && (
+            <ul className={classes.errors}>
+               {Object.entries(errors).map(error => {
+                  if (error[1]) {
+                     return <li key={error[0]}>{error[0]}</li>
+                  }
+                  return null
+               })}
+            </ul>
+         )}
       </div>
    )
 }
 
 Input.propTypes = {
-   className: PropTypes.string,
    label: PropTypes.string,
    type: PropTypes.string,
-   placeholder: PropTypes.string,
-   value: PropTypes.string,
+   value: PropTypes.string.isRequired,
    error: PropTypes.string,
-   isTouched: PropTypes.bool,
-   isValid: PropTypes.bool,
+   touched: PropTypes.bool,
+   untouched: PropTypes.bool,
+   dirty: PropTypes.bool,
+   pristine: PropTypes.bool,
+   valid: PropTypes.bool,
+   invalid: PropTypes.bool,
    shouldValidate: PropTypes.bool,
+   errors: PropTypes.object,
    autoblur: PropTypes.bool,
    autofocus: PropTypes.bool,
-   onChange: PropTypes.func,
+   onChange: PropTypes.func.isRequired,
    onKeyDown: PropTypes.func,
    onKeyUp: PropTypes.func,
-   onKeyPress: PropTypes.func
-}
-
-type Props = {
-   className?: string
-   label?: string
-   type?: string
-   placeholder?: string
-   value?: string
-   error?: string
-   isTouched?: boolean
-   isValid?: boolean
-   shouldValidate?: boolean
-   autoblur?: boolean
-   autofocus?: boolean
-   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
-   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void
-   onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+   onKeyPress: PropTypes.func,
+   onFocus: PropTypes.func,
+   onBlur: PropTypes.func
 }
 
 export default Input
