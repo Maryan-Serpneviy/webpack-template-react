@@ -2,9 +2,9 @@ type ValidatorsType = {
    required?: (value: string) => boolean
    email?: (value: string) => boolean
    title?: (value: string) => boolean
-   minLength?: (length: number) => boolean
-   maxLength?: (length: number) => boolean
-   pattern?: (re: RegExp) => boolean
+   minLength?: (length: number) => (value: string) => boolean
+   maxLength?: (length: number) => (value: string) => boolean
+   pattern?: (re: RegExp) => (value: string) => boolean
 }
 
 class Validators {
@@ -14,12 +14,12 @@ class Validators {
 
    static email(value: string): boolean {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/
-      return re.test(String(value).toLowerCase())
+      return re.test(value.toLowerCase())
    }
 
    static title(value: string): boolean {
       const re = /^[- a-zA-Zа-яА-яїЇіІєЄьЬ#№]+$/
-      return re.test(String(value).toLowerCase())
+      return re.test(value.toLowerCase())
    }
 
    static minLength(minLength: number): Function {
@@ -46,8 +46,9 @@ abstract class AbstractControl {
    // custom
    validators?: ValidatorsType
    type?: InputType
-   id?: number | null
+   id?: number | string
    label?: string
+   placeholder?: string
    error?: string
    // built-in
    value: string
@@ -75,9 +76,10 @@ class FormControl extends AbstractControl {
       this.valid = !validators
       this.errors = {}
 
-      this.id = control.id || Math.round(Math.random() * 1000)
+      this.id = control.id || `control${Math.round(Math.random() * 1000)}`
       this.type = control.type || 'text'
-      this.label = control.label
+      this.label = control.label || ''
+      this.placeholder = control.placeholder || ''
       this.error = control.error || null
       
       this.validators = validators
@@ -95,6 +97,7 @@ class FormControl extends AbstractControl {
          let isValid = true
          for (const validator of this.validators) {
             isValid = validator(this.value) && isValid
+
             // storing errors
             !validator(this.value) ?
                this.errors[validator.name] = true :
@@ -121,7 +124,6 @@ class FormGroup extends AbstractGroup {
       this.controls = controls
       this.valid = true
       this.invalid = false
-
       this.validate = function(): void {
          let isFormValid: boolean = !this._hasRepeatingValues(controls)
 
@@ -152,8 +154,9 @@ type InputType = 'text' | 'tel' | 'url' | 'number' | 'email' | 'password'
 
 interface Control {
    type: InputType
-   id?: number | null
+   id?: number | string
    label: string
+   placeholder: string
    value: string
    error: string
    touched: boolean
